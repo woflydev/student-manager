@@ -1,0 +1,29 @@
+[
+  {
+    "firstName": "Lokajith",
+    "lastName": "V",
+    "address": "46 Staggy Parade",
+    "gender": "Male",
+    "schoolHouse": "Hollows",
+    "age": 15,
+    "uuid": "bf027dee-f65a-41d8-9cdf-9b9834a89ab2"
+  },
+  {
+    "firstName": "Adf",
+    "lastName": "Fdas",
+    "address": "dasf",
+    "gender": "Male",
+    "schoolHouse": "Franklin",
+    "age": 12,
+    "uuid": "e1361057-a798-4fe3-9330-5a1fb0bf85ef"
+  },
+  {
+    "firstName": "Foije",
+    "lastName": "Fwef",
+    "address": "srtgstr",
+    "gender": "Male",
+    "schoolHouse": "DaVinci",
+    "age": 45,
+    "uuid": "6048ffd7-9160-4b78-b66a-6532c5026d3e"
+  }
+]
