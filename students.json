@@ -20,5 +20,16 @@
     "schoolHouse": "Hollows",
     "age": 16,
     "uuid": "8cfc9db0-0061-4690-a8e8-a7ce0447e942"
+  },
+  {
+    "username": "test1",
+    "password": "test",
+    "firstName": "Michael",
+    "lastName": "P",
+    "address": "18 FJeiqjcwe iPlace",
+    "gender": "Male",
+    "schoolHouse": "Curie",
+    "age": 43,
+    "uuid": "160b7cd4-1155-49c3-bb09-3c48a86508e4"
   }
 ]

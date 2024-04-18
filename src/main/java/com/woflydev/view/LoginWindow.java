@@ -15,11 +15,13 @@ public class LoginWindow extends JFrame implements ActionListener {
     private JButton registerButton;
 
     public LoginWindow() {
-        setTitle("Login");
-        setSize(300, 150);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(new GridLayout(3, 2));
+        WindowUtils.applyWindowSettings(
+                this,
+                "Login",
+                new Dimension(300, 150),
+                new GridLayout(3, 2),
+                JFrame.EXIT_ON_CLOSE
+        );
 
         JLabel usernameLabel = new JLabel("Username:");
         add(usernameLabel);

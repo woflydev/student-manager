@@ -141,6 +141,18 @@ public class StudentUtils {
         return false;
     }
 
+    public static boolean usernameExists(String username) {
+        List<Student> studentList = loadStudentsFromDisk();
+        if (studentList != null) {
+            for (Student student : studentList) {
+                if (student.getUsername().equals(username)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void removeStudent(Student studentToRemove) {
         List<Student> studentList = loadStudentsFromDisk();
         if (studentList != null) {

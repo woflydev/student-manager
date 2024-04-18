@@ -22,11 +22,13 @@ public class ManageStudentsWindow extends JFrame {
     private final String[] criteriaOptions = {"First Name", "Last Name", "UUID"};
 
     public ManageStudentsWindow() {
-        setTitle("Manage Students");
-        setSize(800, 400);
-        setResizable(false);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout());
+        WindowUtils.applyWindowSettings(
+                this,
+                "Manage Students",
+                new Dimension(800, 400),
+                new BorderLayout(),
+                JFrame.DISPOSE_ON_CLOSE
+        );
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(3, 1));

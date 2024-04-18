@@ -1,5 +1,6 @@
 package com.woflydev.controller;
 import javax.swing.*;
+import java.awt.*;
 
 public class WindowUtils
 {
@@ -36,6 +37,15 @@ public class WindowUtils
                 "Confirmation",
                 JOptionPane.YES_NO_OPTION
         );
+    }
+
+    public static void applyWindowSettings(JFrame f, String title, Dimension d, LayoutManager lm, int disposeOp) {
+        f.setDefaultCloseOperation(disposeOp);
+        f.setSize(d);
+        f.setResizable(false);
+        f.setTitle(title);
+        f.setLocationRelativeTo(null);
+        f.setLayout(lm);
     }
 
     public static void refreshPanel(JPanel panel) {

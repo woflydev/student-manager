@@ -24,12 +24,13 @@ public class RegisterStudentWindow extends JFrame {
     private static RegisterStudentWindow instance = null;
 
     public RegisterStudentWindow() {
-        setTitle("Enter Information");
-        setSize(400, 420);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Use DISPOSE_ON_CLOSE to just close the window
-        setLayout(new BorderLayout());
+        WindowUtils.applyWindowSettings(
+                this,
+                "Enter Information",
+                new Dimension(400, 420),
+                new BorderLayout(),
+                JFrame.DISPOSE_ON_CLOSE
+        );
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
@@ -129,15 +130,20 @@ public class RegisterStudentWindow extends JFrame {
 
     private boolean validateFields() {
         if (
-                        usernameField.getText().isEmpty() ||
+                usernameField.getText().isEmpty() ||
                         passwordField.getPassword().length == 0 ||
                         firstNameField.getText().isEmpty() ||
                         lastNameField.getText().isEmpty() ||
                         addressField.getText().isEmpty() ||
                         ageField.getText().isEmpty()
-        )
-        {
+        ) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        String username = usernameField.getText();
+        if (StudentUtils.usernameExists(username)) {
+            JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -153,14 +159,16 @@ public class RegisterStudentWindow extends JFrame {
             return false;
         }
 
-        try { int age = Integer.parseInt(ageField.getText()); }
-        catch (NumberFormatException ex) {
+        try {
+            int age = Integer.parseInt(ageField.getText());
+        } catch (NumberFormatException ex) {
             WindowUtils.errorBox("Please enter a valid age.");
             return false;
         }
 
         return true;
     }
+
 
     public static void open() {
         if (instance == null) {

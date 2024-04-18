@@ -1,6 +1,7 @@
 package com.woflydev.view;
 
 import com.woflydev.controller.SettingsUtils;
+import com.woflydev.controller.WindowUtils;
 import com.woflydev.model.Globals;
 
 import javax.swing.*;
@@ -17,11 +18,13 @@ public class SettingsWindow extends JFrame {
     private static JCheckBox normalizeNamesCheckbox;
 
     public SettingsWindow() {
-        setTitle("Settings");
-        setSize(300, 200);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        WindowUtils.applyWindowSettings(
+                this,
+                "Settings",
+                new Dimension(300, 200),
+                new BorderLayout(),
+                JFrame.DISPOSE_ON_CLOSE
+        );
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel settingsPanel = new JPanel();

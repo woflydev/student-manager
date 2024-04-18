@@ -10,7 +10,6 @@ public class HomeWindow extends JFrame {
     private static HomeWindow instance = null;
 
     private JLabel loggedInUserLabel;
-    private String loggedInUserName;
 
     public HomeWindow(String loggedInUserName) {
         setTitle("Home");
@@ -49,11 +48,23 @@ public class HomeWindow extends JFrame {
         });
         buttonPanel.add(settingsBtn);
 
+/*        JButton logoutBtn = new JButton("Logout");
+        logoutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Logout");
+                LoginWindow.open();
+                dispose();
+            }
+        });
+        buttonPanel.add(logoutBtn);*/
+
         JButton exitBtn = new JButton("Exit");
         exitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                System.out.println("Logout");
                 System.out.println("Going offline!");
                 System.exit(0);
             }
