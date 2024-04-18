@@ -15,6 +15,8 @@ import java.util.List;
 
 public class StudentUtils {
     public static void saveToFile(
+            String username,
+            String password,
             String fName,
             String lName,
             String addr,
@@ -34,6 +36,8 @@ public class StudentUtils {
                 : fName;
 
         Student studentInfo = new Student(
+                username,
+                password,
                 fNameFixed,
                 lNameFixed,
                 addr.trim(),
@@ -106,9 +110,7 @@ public class StudentUtils {
                     }
                 }
             }
-        } else {
-            WindowUtils.errorBox("Error when searching for students.\n This may be due to an error when loading students from disk.");
-        }
+        } else { WindowUtils.errorBox("Error when searching for students.\n This may be due to an error when loading students from disk."); }
 
         if (model.getRowCount() == 0) { model.addRow(Globals.STUDENT_TABLE_NOT_FOUND_CONTENT); }
 
@@ -127,6 +129,18 @@ public class StudentUtils {
         return null;
     }
 
+    public static boolean validateStudentLogin(String username, String password) {
+        List<Student> studentList = loadStudentsFromDisk();
+        if (studentList != null) {
+            for (Student student : studentList) {
+                if (student.getUsername().equals(username) && student.getPassword().equals(password)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void removeStudent(Student studentToRemove) {
         List<Student> studentList = loadStudentsFromDisk();
         if (studentList != null) {
@@ -139,6 +153,8 @@ public class StudentUtils {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.append("UUID: " + student.getUuid() + "\n");
+        textArea.append("Username: " + student.getUsername() + "\n");
+        textArea.append("Password: " + student.getPassword() + "\n");
         textArea.append("Name: " + student.getFirstName() + " " + student.getLastName() + "\n");
         textArea.append("Address: " + student.getAddress() + "\n");
         textArea.append("Gender: " + student.getGender() + "\n");

@@ -1,6 +1,9 @@
 package com.woflydev.model;
 
 public class Student {
+    private String username;
+    private String password;
+
     private String firstName;
     private String lastName;
     private String address;
@@ -10,7 +13,9 @@ public class Student {
     private int age;
     private String uuid;
 
-    public Student(String firstName,
+    public Student(String username,
+                   String password,
+                   String firstName,
                    String lastName,
                    String address,
                    String gender,
@@ -18,6 +23,8 @@ public class Student {
                    int age,
                    String uuid
     ) {
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -35,6 +42,22 @@ public class Student {
                 "Gender: " + gender + "\n" +
                 "School House: " + schoolHouse + "\n" +
                 "Age: " + age + "\n";
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {

@@ -12,8 +12,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ManageStudents extends JFrame {
-    private static ManageStudents instance = null;
+public class ManageStudentsWindow extends JFrame {
+    private static ManageStudentsWindow instance = null;
 
     private final JTextField searchField;
     private final JComboBox<String> searchCriteriaDropdown;
@@ -21,7 +21,7 @@ public class ManageStudents extends JFrame {
 
     private final String[] criteriaOptions = {"First Name", "Last Name", "UUID"};
 
-    public ManageStudents() {
+    public ManageStudentsWindow() {
         setTitle("Manage Students");
         setSize(800, 400);
         setResizable(false);
@@ -95,7 +95,7 @@ public class ManageStudents extends JFrame {
     private JTable createTable(DefaultTableModel model) {
         JTable table = new JTable(model);
 
-        // prevent user fucking with the table so it stays pretty
+        // prevent user f*cking with the table, so it stays pretty
         table.setDefaultEditor(Object.class, null);
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
@@ -146,7 +146,7 @@ public class ManageStudents extends JFrame {
 
     public static void open() {
         if (instance == null) {
-            instance = new ManageStudents();
+            instance = new ManageStudentsWindow();
             instance.setVisible(true);
         }
     }

@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
 
-public class CreateStudent extends JFrame {
+public class RegisterStudentWindow extends JFrame {
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
     private final JTextField firstNameField;
     private final JTextField lastNameField;
     private final JTextField addressField;
@@ -19,17 +21,32 @@ public class CreateStudent extends JFrame {
     private final JComboBox<String> houseComboBox;
     private final JTextField ageField;
 
-    private static CreateStudent instance = null;
+    private static RegisterStudentWindow instance = null;
 
-    public CreateStudent() {
+    public RegisterStudentWindow() {
         setTitle("Enter Information");
-        setSize(400, 320);
+        setSize(400, 420);
         setResizable(false);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Use DISPOSE_ON_CLOSE to just close the window
         setLayout(new BorderLayout());
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+
+        JLabel usernameLabel = new JLabel("Username:");
+        usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        formPanel.add(usernameLabel);
+
+        usernameField = new JTextField(30);
+        formPanel.add(usernameField);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        formPanel.add(passwordLabel);
+
+        passwordField = new JPasswordField(30);
+        formPanel.add(passwordField);
 
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -65,6 +82,7 @@ public class CreateStudent extends JFrame {
 
         houseComboBox = new JComboBox<>(Globals.HOUSE_OPTIONS);
         formPanel.add(houseComboBox);
+
         JLabel ageLabel = new JLabel("Age:");
         ageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         formPanel.add(ageLabel);
@@ -81,6 +99,8 @@ public class CreateStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (validateFields()) {
                     StudentUtils.saveToFile(
+                            usernameField.getText(),
+                            new String(passwordField.getPassword()),
                             firstNameField.getText(),
                             lastNameField.getText(),
                             addressField.getText(),
@@ -90,8 +110,6 @@ public class CreateStudent extends JFrame {
                             UUID.randomUUID().toString()
                     );
                     dispose();
-                } else {
-                    short x;
                 }
             }
         });
@@ -111,10 +129,12 @@ public class CreateStudent extends JFrame {
 
     private boolean validateFields() {
         if (
-                firstNameField.getText().isEmpty() ||
-                lastNameField.getText().isEmpty() ||
-                addressField.getText().isEmpty() ||
-                ageField.getText().isEmpty()
+                        usernameField.getText().isEmpty() ||
+                        passwordField.getPassword().length == 0 ||
+                        firstNameField.getText().isEmpty() ||
+                        lastNameField.getText().isEmpty() ||
+                        addressField.getText().isEmpty() ||
+                        ageField.getText().isEmpty()
         )
         {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -144,7 +164,7 @@ public class CreateStudent extends JFrame {
 
     public static void open() {
         if (instance == null) {
-            instance = new CreateStudent();
+            instance = new RegisterStudentWindow();
             instance.setVisible(true);
         }
     }

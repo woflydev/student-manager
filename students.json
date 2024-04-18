@@ -1,92 +1,24 @@
 [
   {
-    "firstName": "Sylvia",
-    "lastName": "L",
-    "address": "19 Dashwood Place",
-    "gender": "Female",
-    "schoolHouse": "Franklin",
-    "age": 12,
-    "uuid": "e1361057-a798-4fe3-9330-5a1fb0bf85ef"
+    "username": "test",
+    "password": "test",
+    "firstName": "Carson",
+    "lastName": "P",
+    "address": "19 oiIJWRFJ",
+    "gender": "Male",
+    "schoolHouse": "DaVinci",
+    "age": 15,
+    "uuid": "434937c0-f1e4-4ea7-b274-4ae5cedccd79"
   },
   {
-    "firstName": "John",
-    "lastName": "D",
-    "address": "123 Maple Road",
+    "username": "test2",
+    "password": "test",
+    "firstName": "Siddharth",
+    "lastName": "Arora",
+    "address": "23 Oxley Road",
     "gender": "Male",
     "schoolHouse": "Hollows",
-    "age": 15,
-    "uuid": "6f73521c-1bc5-45b2-b019-c9b70cfb1102"
-  },
-  {
-    "firstName": "Emily",
-    "lastName": "G",
-    "address": "42 Elm Street",
-    "gender": "Female",
-    "schoolHouse": "Agnesi",
     "age": 16,
-    "uuid": "3fc3e24b-af2d-44a3-8195-6f139cdbe3c8"
-  },
-  {
-    "firstName": "Michael",
-    "lastName": "J",
-    "address": "7 Oak Avenue",
-    "gender": "Male",
-    "schoolHouse": "Curie",
-    "age": 14,
-    "uuid": "0b6c2015-df71-47a6-8aa0-0451f2828245"
-  },
-  {
-    "firstName": "Emma",
-    "lastName": "F",
-    "address": "123 Maple Road",
-    "gender": "Female",
-    "schoolHouse": "Newton",
-    "age": 17,
-    "uuid": "a867e6c7-f0d1-4720-8eef-17f17c2d7217"
-  },
-  {
-    "firstName": "Daniel",
-    "lastName": "I",
-    "address": "56 Pine Lane",
-    "gender": "Male",
-    "schoolHouse": "Hawking",
-    "age": 13,
-    "uuid": "d8e0b20d-1bf3-4ec9-83ae-053b46ee7dbb"
-  },
-  {
-    "firstName": "Olivia",
-    "lastName": "C",
-    "address": "7 Oak Avenue",
-    "gender": "Female",
-    "schoolHouse": "DaVinci",
-    "age": 11,
-    "uuid": "cd55bce2-3ef6-4f60-9c6f-36ecdd334e7d"
-  },
-  {
-    "firstName": "Sophia",
-    "lastName": "H",
-    "address": "42 Elm Street",
-    "gender": "Female",
-    "schoolHouse": "Jackson",
-    "age": 15,
-    "uuid": "e8e4e5f5-4e9a-4466-92f3-87f377493c30"
-  },
-  {
-    "firstName": "James",
-    "lastName": "E",
-    "address": "19 Dashwood Place",
-    "gender": "Male",
-    "schoolHouse": "Franklin",
-    "age": 12,
-    "uuid": "83dd3d6d-5fd9-4f16-b15c-739f56766cfb"
-  },
-  {
-    "firstName": "Emma",
-    "lastName": "B",
-    "address": "123 Maple Road",
-    "gender": "Female",
-    "schoolHouse": "Newton",
-    "age": 17,
-    "uuid": "5de6a512-50c8-42b6-9f90-c760c51b520a"
+    "uuid": "8cfc9db0-0061-4690-a8e8-a7ce0447e942"
   }
 ]
