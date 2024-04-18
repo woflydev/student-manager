@@ -1,7 +1,9 @@
 package com.woflydev.view;
 
+import com.woflydev.controller.SettingsUtils;
 import com.woflydev.controller.StudentUtils;
 import com.woflydev.controller.WindowUtils;
+import com.woflydev.model.Globals;
 import com.woflydev.model.Student;
 
 import javax.swing.*;
@@ -22,6 +24,7 @@ public class ManageStudents extends JFrame {
     public ManageStudents() {
         setTitle("Manage Students");
         setSize(800, 400);
+        setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -91,6 +94,8 @@ public class ManageStudents extends JFrame {
 
     private JTable createTable(DefaultTableModel model) {
         JTable table = new JTable(model);
+
+        // prevent user fucking with the table so it stays pretty
         table.setDefaultEditor(Object.class, null);
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
@@ -103,20 +108,29 @@ public class ManageStudents extends JFrame {
                 int row = evt.getY() / table.getRowHeight();
                 if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0) {
                     if (table.getValueAt(row, column).equals("Delete")) {
-                        int option = WindowUtils.confirmationBox("Delete this record?");
-                        if (option == JOptionPane.YES_OPTION) {
-                            String uuid = (String) table.getValueAt(row, 0); // Get UUID from the selected row
-                            Student studentToRemove = StudentUtils.getStudentByUUID(uuid); // Get student object by UUID
+                        // get the UUID -> student first...
+                        String uuid = (String) table.getValueAt(row, 0);
+                        Student studentToRemove = StudentUtils.getStudentByUUID(uuid);
+
+                        // if setting for non-confirmational delete is on, delete straight away
+                        if (SettingsUtils.getSetting(Globals.SETTINGS_DELETE_WITHOUT_CONFIRM)) {
                             if (studentToRemove != null) {
                                 StudentUtils.removeStudent(studentToRemove);
                                 displayAllStudents();
-                            } else {
-                                WindowUtils.errorBox("Error: Unable to find student to delete.");
+                            } else { WindowUtils.errorBox("Error: Unable to find student to delete."); }
+                        } else {
+                            int option = WindowUtils.confirmationBox("Delete this record?");
+                            if (option == JOptionPane.YES_OPTION) {
+                                if (studentToRemove != null) {
+                                    StudentUtils.removeStudent(studentToRemove);
+                                    displayAllStudents();
+                                } else { WindowUtils.errorBox("Error: Unable to find student to delete."); }
                             }
                         }
-                    } else { // Display student data in popup on non-delete cell click
-                        String uuid = (String) table.getValueAt(row, 0); // Get UUID from the selected row
-                        Student student = StudentUtils.getStudentByUUID(uuid); // Get student object by UUID
+                    } else {
+                        // grab UUID of student for popup
+                        String uuid = (String) table.getValueAt(row, 0);
+                        Student student = StudentUtils.getStudentByUUID(uuid);
                         if (student != null) {
                             StudentUtils.showStudentPopup(student);
                         } else {
@@ -129,7 +143,6 @@ public class ManageStudents extends JFrame {
 
         return table;
     }
-
 
     public static void open() {
         if (instance == null) {

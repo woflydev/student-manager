@@ -21,4 +21,7 @@ public class Globals {
     public static final Object[] STUDENT_TABLE_NOT_FOUND_CONTENT = {
             "No results found", "", "", "", "", "", "", "",
     };
+
+    public static final String SETTINGS_DELETE_WITHOUT_CONFIRM = "deleteWithoutConfirmation";
+    public static final String SETTINGS_NORMALIZE_NAMES = "normalizeNames";
 }

@@ -30,6 +30,15 @@ public class HomeWindow extends JFrame {
         });
         add(mngStudentBtn);
 
+        JButton settingsBtn = new JButton("Settings");
+        settingsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingsWindow.open();
+            }
+        });
+        add(settingsBtn);
+
         JButton exitBtn = new JButton("Exit");
         exitBtn.addActionListener(new ActionListener() {
             @Override

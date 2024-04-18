@@ -26,8 +26,13 @@ public class StudentUtils {
         FileUtils.createBlank();
         List<Student> existingStudentList = loadStudentsFromDisk();
 
-        String fNameFixed = fName.trim().substring(0, 1).toUpperCase() + fName.trim().substring(1).toLowerCase();
-        String lNameFixed = lName.trim().substring(0, 1).toUpperCase() + lName.trim().substring(1).toLowerCase();
+        String fNameFixed = SettingsUtils.getSetting(Globals.SETTINGS_NORMALIZE_NAMES)
+                ? fName.trim().substring(0, 1).toUpperCase() + fName.trim().substring(1).toLowerCase()
+                : fName;
+        String lNameFixed = SettingsUtils.getSetting(Globals.SETTINGS_NORMALIZE_NAMES)
+                ? lName.trim().substring(0, 1).toUpperCase() + lName.trim().substring(1).toLowerCase()
+                : fName;
+
         Student studentInfo = new Student(
                 fNameFixed,
                 lNameFixed,
