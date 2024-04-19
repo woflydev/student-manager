@@ -92,7 +92,7 @@ public class Student {
         this.gender = gender;
     }
 
-    public String getSchoolHouse() {
+    public String getHouse() {
         return schoolHouse;
     }
 

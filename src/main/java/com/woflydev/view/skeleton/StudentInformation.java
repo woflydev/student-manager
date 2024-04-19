@@ -1,4 +1,4 @@
-package com.woflydev.view;
+package com.woflydev.view.skeleton;
 
 import com.woflydev.controller.GeneralUtils;
 import com.woflydev.controller.StudentUtils;
@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
 
-public class RegisterStudentWindow extends JFrame {
+public class StudentInformation extends JFrame {
+    protected static StudentInformation instance = null;
+
     private final JTextField usernameField;
     private final JPasswordField passwordField;
     private final JTextField firstNameField;
@@ -21,9 +23,9 @@ public class RegisterStudentWindow extends JFrame {
     private final JComboBox<String> houseComboBox;
     private final JTextField ageField;
 
-    private static RegisterStudentWindow instance = null;
+    private final JButton submitButton;
 
-    public RegisterStudentWindow() {
+    public StudentInformation() {
         WindowUtils.applyWindowSettings(
                 this,
                 "Enter Information",
@@ -46,8 +48,25 @@ public class RegisterStudentWindow extends JFrame {
         passwordLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         formPanel.add(passwordLabel);
 
+        JPanel passwordPanel = new JPanel(new BorderLayout());
         passwordField = new JPasswordField(30);
-        formPanel.add(passwordField);
+        passwordPanel.add(passwordField, BorderLayout.CENTER);
+
+        JButton showPasswordButton = new JButton("Show");
+        showPasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (showPasswordButton.getText().equals("Show")) {
+                    passwordField.setEchoChar((char) 0);
+                    showPasswordButton.setText("Hide");
+                } else {
+                    passwordField.setEchoChar('*');
+                    showPasswordButton.setText("Show");
+                }
+            }
+        });
+        passwordPanel.add(showPasswordButton, BorderLayout.EAST);
+        formPanel.add(passwordPanel);
 
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -94,11 +113,11 @@ public class RegisterStudentWindow extends JFrame {
         add(formPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton submitButton = new JButton("Submit");
+        submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validateFields()) {
+                if (fieldsValid()) {
                     StudentUtils.saveToFile(
                             usernameField.getText(),
                             new String(passwordField.getPassword()),
@@ -108,7 +127,7 @@ public class RegisterStudentWindow extends JFrame {
                             (String) genderComboBox.getSelectedItem(),
                             (String) houseComboBox.getSelectedItem(),
                             Integer.parseInt(ageField.getText()),
-                            UUID.randomUUID().toString()
+                            supplyUUID()
                     );
                     dispose();
                 }
@@ -128,7 +147,11 @@ public class RegisterStudentWindow extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private boolean validateFields() {
+    // this is overridden in the EditWindow so that it overwrites an existing student
+    // instead of creating a new one.
+    protected String supplyUUID() { return UUID.randomUUID().toString(); }
+
+    protected boolean fieldsValid() {
         if (
                 usernameField.getText().isEmpty() ||
                         passwordField.getPassword().length == 0 ||
@@ -138,12 +161,6 @@ public class RegisterStudentWindow extends JFrame {
                         ageField.getText().isEmpty()
         ) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        String username = usernameField.getText();
-        if (StudentUtils.usernameExists(username)) {
-            JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -169,10 +186,9 @@ public class RegisterStudentWindow extends JFrame {
         return true;
     }
 
-
     public static void open() {
         if (instance == null) {
-            instance = new RegisterStudentWindow();
+            instance = new StudentInformation();
             instance.setVisible(true);
         }
     }
@@ -183,5 +199,37 @@ public class RegisterStudentWindow extends JFrame {
         if (instance != null) {
             instance = null;
         }
+    }
+
+    public JTextField getUsernameField() {
+        return usernameField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public JTextField getFirstNameField() {
+        return firstNameField;
+    }
+
+    public JTextField getLastNameField() {
+        return lastNameField;
+    }
+
+    public JTextField getAddressField() {
+        return addressField;
+    }
+
+    public JComboBox<String> getGenderComboBox() {
+        return genderComboBox;
+    }
+
+    public JComboBox<String> getHouseComboBox() {
+        return houseComboBox;
+    }
+
+    public JTextField getAgeField() {
+        return ageField;
     }
 }

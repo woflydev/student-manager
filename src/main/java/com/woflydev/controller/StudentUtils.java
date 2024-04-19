@@ -47,8 +47,18 @@ public class StudentUtils {
                 uuid
         );
 
-        if (existingStudentList == null) existingStudentList = new ArrayList<>();
-        existingStudentList.add(studentInfo);
+        boolean found = false;
+        for (int i = 0; i < Objects.requireNonNull(existingStudentList).size(); i++) {
+            Student studentInList = existingStudentList.get(i);
+            if (studentInList.getUuid().equals(uuid)) {
+                existingStudentList.set(i, studentInfo);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) existingStudentList.add(studentInfo);
+
         saveToDisk(existingStudentList);
     }
 
@@ -73,16 +83,7 @@ public class StudentUtils {
         if (studentList != null) {
             if (term == null || term.isEmpty()) {
                 for (Student student : studentList) {
-                    model.addRow(new Object[]{
-                            student.getUuid(),
-                            student.getFirstName(),
-                            student.getLastName(),
-                            student.getAddress(),
-                            student.getGender(),
-                            student.getSchoolHouse(),
-                            student.getAge(),
-                            "Delete"
-                    });
+                    model.addRow(rowInformation(student));
                 }
             } else {
                 studentList.sort(new Comparator<Student>() {
@@ -97,16 +98,7 @@ public class StudentUtils {
                 for (Student student : studentList) {
                     double similarity = calculateSimilarity(student, term, criteria);
                     if (similarity > 0) {
-                        model.addRow(new Object[]{
-                                student.getUuid(),
-                                student.getFirstName(),
-                                student.getLastName(),
-                                student.getAddress(),
-                                student.getGender(),
-                                student.getSchoolHouse(),
-                                student.getAge(),
-                                "Delete"
-                        });
+                        model.addRow(rowInformation(student));
                     }
                 }
             }
@@ -115,6 +107,20 @@ public class StudentUtils {
         if (model.getRowCount() == 0) { model.addRow(Globals.STUDENT_TABLE_NOT_FOUND_CONTENT); }
 
         return model;
+    }
+
+    private static Object[] rowInformation(Student student) {
+        return new Object[]{
+                student.getUuid(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getAddress(),
+                student.getGender(),
+                student.getHouse(),
+                student.getAge(),
+                "Edit",
+                "Delete"
+        };
     }
 
     public static @Nullable Student getStudentByUUID(String uuid) {
@@ -126,7 +132,14 @@ public class StudentUtils {
                 }
             }
         }
+        WindowUtils.errorBox("An error occurred when getting student from UUID.");
         return null;
+    }
+
+    public static @Nullable Student getStudentByTableRow(JTable t, int row) {
+        String uuid = (String) t.getValueAt(row, 0);
+        Student s = getStudentByUUID(uuid);
+        return s;
     }
 
     public static boolean validateStudentLogin(String username, String password) {
@@ -170,7 +183,7 @@ public class StudentUtils {
         textArea.append("Name: " + student.getFirstName() + " " + student.getLastName() + "\n");
         textArea.append("Address: " + student.getAddress() + "\n");
         textArea.append("Gender: " + student.getGender() + "\n");
-        textArea.append("House: " + student.getSchoolHouse() + "\n");
+        textArea.append("House: " + student.getHouse() + "\n");
         textArea.append("Age: " + student.getAge() + "\n");
 
         JScrollPane scrollPane = new JScrollPane(textArea);

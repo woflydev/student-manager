@@ -15,11 +15,12 @@ public class Globals {
             "Gender",
             "School House",
             "Age",
+            "",
             ""
     };
 
     public static final Object[] STUDENT_TABLE_NOT_FOUND_CONTENT = {
-            "No results found", "", "", "", "", "", "", "",
+            "No results found", "", "", "", "", "", "", "", "",
     };
 
     public static final String SETTINGS_DELETE_WITHOUT_CONFIRM = "deleteWithoutConfirmation";

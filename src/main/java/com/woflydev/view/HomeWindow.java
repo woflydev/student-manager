@@ -1,5 +1,7 @@
 package com.woflydev.view;
 
+import com.woflydev.view.skeleton.StudentInformation;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -25,7 +27,7 @@ public class HomeWindow extends JFrame {
         createStudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegisterStudentWindow.open();
+                StudentInformation.open();
             }
         });
         buttonPanel.add(createStudentBtn);

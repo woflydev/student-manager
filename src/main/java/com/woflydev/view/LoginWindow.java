@@ -11,8 +11,8 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton;
-    private JButton registerButton;
+    private JButton loginBtn;
+    private JButton registerBtn;
 
     public LoginWindow() {
         WindowUtils.applyWindowSettings(
@@ -35,19 +35,20 @@ public class LoginWindow extends JFrame implements ActionListener {
         passwordField = new JPasswordField();
         add(passwordField);
 
-        loginButton = new JButton("Login");
-        loginButton.addActionListener(this);
-        add(loginButton);
+        loginBtn = new JButton("Login");
+        loginBtn.addActionListener(this);
+        add(loginBtn);
 
-        registerButton = new JButton("Register");
-        registerButton.addActionListener(this);
-        add(registerButton);
+        registerBtn = new JButton("Register");
+        registerBtn.addActionListener(this);
+        add(registerBtn);
 
         setVisible(true);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton) {
+        if (e.getSource() == loginBtn) {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
@@ -58,8 +59,8 @@ public class LoginWindow extends JFrame implements ActionListener {
             } else {
                 WindowUtils.infoBox("Invalid username or password! Register?");
             }
-        } else if (e.getSource() == registerButton) {
-            RegisterStudentWindow.open();
+        } else if (e.getSource() == registerBtn) {
+            StudentRegisterWindow.open();
         }
     }
 

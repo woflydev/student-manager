@@ -111,8 +111,7 @@ public class ManageStudentsWindow extends JFrame {
                 if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0) {
                     if (table.getValueAt(row, column).equals("Delete")) {
                         // get the UUID -> student first...
-                        String uuid = (String) table.getValueAt(row, 0);
-                        Student studentToRemove = StudentUtils.getStudentByUUID(uuid);
+                        Student studentToRemove = StudentUtils.getStudentByTableRow(table, row);
 
                         // if setting for non-confirmational delete is on, delete straight away
                         if (SettingsUtils.getSetting(Globals.SETTINGS_DELETE_WITHOUT_CONFIRM)) {
@@ -128,6 +127,14 @@ public class ManageStudentsWindow extends JFrame {
                                     displayAllStudents();
                                 } else { WindowUtils.errorBox("Error: Unable to find student to delete."); }
                             }
+                        }
+                    }
+
+                    if (table.getValueAt(row, column).equals("Edit")) {
+                        System.out.println("Edit button was clicked!");
+                        Student studentToEdit = StudentUtils.getStudentByTableRow(table, row);
+                        if (studentToEdit != null) {
+                            StudentEditWindow.open(studentToEdit);
                         }
                     } else {
                         // grab UUID of student for popup

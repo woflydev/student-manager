@@ -1,16 +1,5 @@
 [
   {
-    "username": "test",
-    "password": "test",
-    "firstName": "Carson",
-    "lastName": "P",
-    "address": "19 oiIJWRFJ",
-    "gender": "Male",
-    "schoolHouse": "DaVinci",
-    "age": 15,
-    "uuid": "434937c0-f1e4-4ea7-b274-4ae5cedccd79"
-  },
-  {
     "username": "test2",
     "password": "test",
     "firstName": "Siddharth",
@@ -31,5 +20,16 @@
     "schoolHouse": "Curie",
     "age": 43,
     "uuid": "160b7cd4-1155-49c3-bb09-3c48a86508e4"
+  },
+  {
+    "username": "test",
+    "password": "test",
+    "firstName": "Carson",
+    "lastName": "P",
+    "address": "19 FIOWEJOI Pl",
+    "gender": "Male",
+    "schoolHouse": "Franklin",
+    "age": 15,
+    "uuid": "10d42ce6-d2b8-4d78-b835-5f7560541dad"
   }
 ]
