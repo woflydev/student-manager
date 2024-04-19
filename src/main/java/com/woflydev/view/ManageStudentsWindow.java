@@ -57,6 +57,7 @@ public class ManageStudentsWindow extends JFrame {
         resultPanel = new JPanel();
         resultPanel.setLayout(new GridLayout(0, 2));
         JScrollPane scrollPane = new JScrollPane(resultPanel);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
 
         displayAllStudents();
@@ -77,9 +78,10 @@ public class ManageStudentsWindow extends JFrame {
     private void displaySearchResults(String term, String criteria) {
         resultPanel.removeAll();
 
-        DefaultTableModel model = StudentUtils.searchStudentsTableModel(term, criteria);
-        JTable table = createTable(model);
-        resultPanel.add(new JScrollPane(table));
+        JScrollPane pane = new JScrollPane(
+                createTable(StudentUtils.searchStudentsTableModel(term, criteria))
+        ); pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        resultPanel.add(pane);
 
         WindowUtils.refreshPanel(resultPanel);
     }
@@ -87,9 +89,10 @@ public class ManageStudentsWindow extends JFrame {
     private void displayAllStudents() {
         resultPanel.removeAll();
 
-        DefaultTableModel model = StudentUtils.searchStudentsTableModel("", "");
-        JTable table = createTable(model);
-        resultPanel.add(new JScrollPane(table));
+        JScrollPane pane = new JScrollPane(
+                createTable(StudentUtils.searchStudentsTableModel("", ""))
+        ); pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        resultPanel.add(pane);
 
         WindowUtils.refreshPanel(resultPanel);
     }
