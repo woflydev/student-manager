@@ -154,11 +154,11 @@ public class StudentInformation extends JFrame {
     protected boolean fieldsValid() {
         if (
                 usernameField.getText().isEmpty() ||
-                        passwordField.getPassword().length == 0 ||
-                        firstNameField.getText().isEmpty() ||
-                        lastNameField.getText().isEmpty() ||
-                        addressField.getText().isEmpty() ||
-                        ageField.getText().isEmpty()
+                passwordField.getPassword().length == 0 ||
+                firstNameField.getText().isEmpty() ||
+                lastNameField.getText().isEmpty() ||
+                addressField.getText().isEmpty() ||
+                ageField.getText().isEmpty()
         ) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
