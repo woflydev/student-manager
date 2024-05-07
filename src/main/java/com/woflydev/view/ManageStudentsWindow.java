@@ -68,11 +68,8 @@ public class ManageStudentsWindow extends JFrame {
         String selectedCriteria = (String) searchCriteriaDropdown.getSelectedItem();
 
         // depending on the input, display search results or all students
-        if (searchTerm.isEmpty()) {
-            displayAllStudents();
-        } else {
-            displaySearchResults(searchTerm, selectedCriteria);
-        }
+        if (searchTerm.isEmpty()) displayAllStudents();
+        else displaySearchResults(searchTerm, selectedCriteria);
     }
 
     private void displaySearchResults(String term, String criteria) {
